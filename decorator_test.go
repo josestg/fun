@@ -2,12 +2,12 @@ package fun
 
 import "testing"
 
-func TestDecorateAny(t *testing.T) {
+func TestApplyNDecorators(t *testing.T) {
 	t.Run("scalar", func(t *testing.T) {
 		inc := func(x int) int { return x + 1 }
 		dec := func(x int) int { return x - 1 }
 		dbl := func(x int) int { return 2 * x }
-		n := DecorateAny(1, inc, inc, dbl, dec)
+		n := ApplyNDecorators(1, inc, inc, dbl, dec)
 		if n != 5 {
 			t.Errorf("expected 5, got %d", n)
 		}
@@ -19,7 +19,7 @@ func TestDecorateAny(t *testing.T) {
 		dec := func(f func() int) func() int { return func() int { return f() - 1 } }
 		dbl := func(f func() int) func() int { return func() int { return 2 * f() } }
 
-		f := DecorateAny(one, inc, inc, dbl, dec)
+		f := ApplyNDecorators(one, inc, inc, dbl, dec)
 		n := f()
 		if n != 5 {
 			t.Errorf("expected 5, got %d", n)

@@ -10,11 +10,13 @@ func ID[T any](t T) T { return t }
 // Decorate applies the decorator to the provided value.
 func (d Decorator[T]) Decorate(t T) T { return d(t) }
 
-// DecorateAny decorates the provided value with any number of decorators.
-func DecorateAny[T any](t T, decorators ...Decorator[T]) T { return Decorate(t, decorators) }
+// ApplyNDecorators decorates the provided value with any number of decorators.
+func ApplyNDecorators[T any](t T, decorators ...Decorator[T]) T {
+	return ApplyDecorators(t, decorators)
+}
 
-// Decorate decorates the provided value with the provided decorators.
-func Decorate[T any](t T, decorators []Decorator[T]) T {
+// ApplyDecorators decorates the provided value with the provided decorators.
+func ApplyDecorators[T any](t T, decorators []Decorator[T]) T {
 	for _, d := range decorators {
 		t = d.Decorate(t)
 	}
