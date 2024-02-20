@@ -78,6 +78,13 @@ func TestAnd(t *testing.T) {
 	expectFalse(t, oneAndTwo(3))
 }
 
+func TestNot(t *testing.T) {
+	notOne := Not(Eq(1))
+	expectFalse(t, notOne(1))
+	expectTrue(t, notOne(2))
+
+}
+
 func expectTrue(t *testing.T, b bool) {
 	if !b {
 		t.Error("expect true")

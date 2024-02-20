@@ -5,9 +5,6 @@ import "cmp"
 // Predicate checks if a value satisfies a condition.
 type Predicate[T any] func(T) bool
 
-// Test checks if a value satisfies the predicate.
-func (p Predicate[T]) Test(x T) bool { return p(x) }
-
 // Neq checks if a value is not equal to another.
 func Neq[T comparable](v T) Predicate[T] { return func(x T) bool { return x != v } }
 
