@@ -1,8 +1,9 @@
 package slices
 
 import (
-	"github.com/josestg/fun/cmp"
 	"testing"
+
+	"github.com/josestg/fun/cmp"
 )
 
 type Task struct {
