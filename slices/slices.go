@@ -1,11 +1,11 @@
 package slices
 
 import (
-	"github.com/josestg/fun/cmp"
+	"github.com/josestg/fun/prd"
 )
 
 // Some returns true if at least one element in the slice satisfies the predicate.
-func Some[S ~[]E, E any](s S, p cmp.Predicate[E]) bool {
+func Some[S ~[]E, E any](s S, p prd.Predicate[E]) bool {
 	for _, v := range s {
 		if p(v) {
 			return true
@@ -15,7 +15,7 @@ func Some[S ~[]E, E any](s S, p cmp.Predicate[E]) bool {
 }
 
 // All returns true if all elements in the slice satisfy the predicate.
-func All[S ~[]E, E any](s S, p cmp.Predicate[E]) bool {
+func All[S ~[]E, E any](s S, p prd.Predicate[E]) bool {
 	for _, v := range s {
 		if !p(v) {
 			return false
@@ -25,7 +25,7 @@ func All[S ~[]E, E any](s S, p cmp.Predicate[E]) bool {
 }
 
 // Filter returns a new slice containing only the elements that satisfy the predicate.
-func Filter[S ~[]E, E any](s S, p cmp.Predicate[E]) S {
+func Filter[S ~[]E, E any](s S, p prd.Predicate[E]) S {
 	n := Count(s, p)
 	return Fold(
 		s,
@@ -40,7 +40,7 @@ func Filter[S ~[]E, E any](s S, p cmp.Predicate[E]) S {
 }
 
 // Count returns the number of elements in the slice that satisfy the predicate.
-func Count[S ~[]E, E any](s S, p cmp.Predicate[E]) int {
+func Count[S ~[]E, E any](s S, p prd.Predicate[E]) int {
 	return Fold(s, 0, func(n int, x E) int {
 		if p(x) {
 			n++
@@ -59,7 +59,7 @@ func Map[SE ~[]E, ST []T, E, T any](s SE, f func(E) T) ST {
 }
 
 // Find returns the first element in the slice that satisfies the predicate.
-func Find[S ~[]E, E any](s S, p cmp.Predicate[E]) (E, bool) {
+func Find[S ~[]E, E any](s S, p prd.Predicate[E]) (E, bool) {
 	for _, v := range s {
 		if p(v) {
 			return v, true
@@ -109,16 +109,16 @@ func EqualOf[S1 ~[]E1, S2 ~[]E2, E1, E2 any](a S1, b S2, eq func(E1, E2) bool) b
 
 // Index returns the index of the first occurrence of the value in the slice.
 func Index[S ~[]E, E comparable](s S, v E) int {
-	return IndexOf(s, cmp.Eq(v))
+	return IndexOf(s, prd.Eq(v))
 }
 
 // LastIndex returns the index of the last occurrence of the value in the slice.
 func LastIndex[S ~[]E, E comparable](s S, v E) int {
-	return LastIndexOf(s, cmp.Eq(v))
+	return LastIndexOf(s, prd.Eq(v))
 }
 
 // IndexOf returns the index of the first element in the slice that satisfies the predicate.
-func IndexOf[S ~[]E, E any](s S, p cmp.Predicate[E]) int {
+func IndexOf[S ~[]E, E any](s S, p prd.Predicate[E]) int {
 	for i := range s {
 		if p(s[i]) {
 			return i
@@ -128,7 +128,7 @@ func IndexOf[S ~[]E, E any](s S, p cmp.Predicate[E]) int {
 }
 
 // LastIndexOf returns the index of the last element in the slice that satisfies the predicate.
-func LastIndexOf[S ~[]E, E any](s S, p cmp.Predicate[E]) int {
+func LastIndexOf[S ~[]E, E any](s S, p prd.Predicate[E]) int {
 	for i := len(s) - 1; i >= 0; i-- {
 		if p(s[i]) {
 			return i

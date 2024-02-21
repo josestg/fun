@@ -3,7 +3,7 @@ package slices
 import (
 	"testing"
 
-	"github.com/josestg/fun/cmp"
+	"github.com/josestg/fun/prd"
 )
 
 type Task struct {
@@ -27,11 +27,11 @@ var tasks = []Task{
 
 func TestSome(t *testing.T) {
 	s := []int{1, 2, 3, 4, 5}
-	if !Some(s, cmp.Eq(3)) {
+	if !Some(s, prd.Eq(3)) {
 		t.Error("expect found some value that equal to 3")
 	}
 
-	if Some(s, cmp.Gt(5)) {
+	if Some(s, prd.Gt(5)) {
 		t.Error("expect no value that greater than 5")
 	}
 
@@ -43,11 +43,11 @@ func TestSome(t *testing.T) {
 
 func TestAll(t *testing.T) {
 	s := []int{1, 2, 3, 4, 5}
-	if !All(s, cmp.Gte(1)) {
+	if !All(s, prd.Gte(1)) {
 		t.Error("expect all values greater or equal to 1")
 	}
 
-	if All(s, cmp.Gt(1)) {
+	if All(s, prd.Gt(1)) {
 		t.Error("not all values is greater or equal to 1")
 	}
 
@@ -74,7 +74,7 @@ func TestMap(t *testing.T) {
 
 func TestCount(t *testing.T) {
 	s := []int{1, 2, 3, 4, 5}
-	n := Count(s, cmp.Lt(3))
+	n := Count(s, prd.Lt(3))
 	if n != 2 {
 		t.Error("expect there are 2 items < 3")
 	}
@@ -82,7 +82,7 @@ func TestCount(t *testing.T) {
 
 func TestFind(t *testing.T) {
 	s := []int{1, 2, 3, 4, 5}
-	v, ok := Find(s, cmp.Gt(3))
+	v, ok := Find(s, prd.Gt(3))
 	if !ok {
 		t.Error("expect found value > 3")
 	}
@@ -90,7 +90,7 @@ func TestFind(t *testing.T) {
 		t.Errorf("expect found value 4, got %d", v)
 	}
 
-	v, ok = Find(s, cmp.Gt(5))
+	v, ok = Find(s, prd.Gt(5))
 	if ok {
 		t.Error("expect not found value > 5")
 	}

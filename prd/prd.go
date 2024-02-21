@@ -1,4 +1,4 @@
-package cmp
+package prd
 
 import "cmp"
 

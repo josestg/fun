@@ -1,9 +1,9 @@
 package fun
 
-import "github.com/josestg/fun/cmp"
+import "github.com/josestg/fun/prd"
 
 // First returns the first value that satisfies the predicate.
-func First[T any](p cmp.Predicate[T], x T, xs ...T) T {
+func First[T any](p prd.Predicate[T], x T, xs ...T) T {
 	if p(x) {
 		return x
 	}
