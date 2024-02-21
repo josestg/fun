@@ -88,15 +88,22 @@ func Each[S ~[]E, E any](s S, f func(E)) {
 // Equal returns true if the two slices are equal.
 // Two slices are equal if they have the same length and all elements are equal.
 func Equal[S ~[]E, E comparable](a, b S) bool {
+	return EqualOf(a, b, func(e1 E, e2 E) bool { return e1 == e2 })
+}
+
+// EqualOf returns true if the two slice are satisfied the quality function.
+// Two slices are equal if they have the same length and all elements are satisfied the quality function.
+func EqualOf[S1 ~[]E1, S2 ~[]E2, E1, E2 any](a S1, b S2, eq func(E1, E2) bool) bool {
 	if len(a) != len(b) {
 		return false
 	}
 
 	for i := range a {
-		if a[i] != b[i] {
+		if !eq(a[i], b[i]) {
 			return false
 		}
 	}
+
 	return true
 }
 

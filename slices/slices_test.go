@@ -123,6 +123,16 @@ func TestEqual(t *testing.T) {
 	}
 }
 
+func TestEqualOf(t *testing.T) {
+	a := []int{1, 2, 3, 4, 5}
+	b := []int{5, 6, 7, 8, 9}
+	if !EqualOf(a, b, func(e1 int, e2 int) bool {
+		return e1 < 10 && e2 < 10
+	}) {
+		t.Error("expect equal")
+	}
+}
+
 func TestIndex(t *testing.T) {
 	s := []int{1, 2, 1}
 	i := Index(s, 1)
