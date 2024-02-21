@@ -122,3 +122,43 @@ func TestEqual(t *testing.T) {
 		t.Error("expect not equal")
 	}
 }
+
+func TestIndex(t *testing.T) {
+	s := []int{1, 2, 1}
+	i := Index(s, 1)
+	if i != 0 {
+		t.Errorf("expect index 0, got %d", i)
+	}
+
+	i = Index(s, 3)
+	if i != -1 {
+		t.Errorf("expect index -1, got %d", i)
+	}
+}
+
+func TestLastIndex(t *testing.T) {
+	s := []int{1, 2, 1}
+	i := LastIndex(s, 1)
+	if i != 2 {
+		t.Errorf("expect index 2, got %d", i)
+	}
+
+	i = LastIndex(s, 3)
+	if i != -1 {
+		t.Errorf("expect index -1, got %d", i)
+	}
+}
+
+func TestIndexOf(t *testing.T) {
+	i := IndexOf(tasks, Completed)
+	if i != 0 {
+		t.Errorf("expect index 0, got %d", i)
+	}
+}
+
+func TestLastIndexOf(t *testing.T) {
+	i := LastIndexOf(tasks, Completed)
+	if i != 2 {
+		t.Errorf("expect index 2, got %d", i)
+	}
+}

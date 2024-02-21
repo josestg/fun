@@ -99,3 +99,33 @@ func Equal[S ~[]E, E comparable](a, b S) bool {
 	}
 	return true
 }
+
+// Index returns the index of the first occurrence of the value in the slice.
+func Index[S ~[]E, E comparable](s S, v E) int {
+	return IndexOf(s, cmp.Eq(v))
+}
+
+// LastIndex returns the index of the last occurrence of the value in the slice.
+func LastIndex[S ~[]E, E comparable](s S, v E) int {
+	return LastIndexOf(s, cmp.Eq(v))
+}
+
+// IndexOf returns the index of the first element in the slice that satisfies the predicate.
+func IndexOf[S ~[]E, E any](s S, p cmp.Predicate[E]) int {
+	for i := range s {
+		if p(s[i]) {
+			return i
+		}
+	}
+	return -1
+}
+
+// LastIndexOf returns the index of the last element in the slice that satisfies the predicate.
+func LastIndexOf[S ~[]E, E any](s S, p cmp.Predicate[E]) int {
+	for i := len(s) - 1; i >= 0; i-- {
+		if p(s[i]) {
+			return i
+		}
+	}
+	return -1
+}
