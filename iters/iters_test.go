@@ -123,10 +123,10 @@ func TestEqual(t *testing.T) {
 	}
 }
 
-func TestEqualOf(t *testing.T) {
+func TestEqualBy(t *testing.T) {
 	a := []int{1, 2, 3, 4, 5}
 	b := []int{5, 6, 7, 8, 9}
-	if !EqualOf(a, b, func(e1 int, e2 int) bool {
+	if !EqualBy(a, b, func(e1 int, e2 int) bool {
 		return e1 < 10 && e2 < 10
 	}) {
 		t.Error("expect equal")
@@ -159,15 +159,15 @@ func TestLastIndex(t *testing.T) {
 	}
 }
 
-func TestIndexOf(t *testing.T) {
-	i := IndexOf(tasks, Completed)
+func TestIndexBy(t *testing.T) {
+	i := IndexBy(tasks, Completed)
 	if i != 0 {
 		t.Errorf("expect index 0, got %d", i)
 	}
 }
 
-func TestLastIndexOf(t *testing.T) {
-	i := LastIndexOf(tasks, Completed)
+func TestLastIndexBy(t *testing.T) {
+	i := LastIndexBy(tasks, Completed)
 	if i != 2 {
 		t.Errorf("expect index 2, got %d", i)
 	}

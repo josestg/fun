@@ -88,12 +88,12 @@ func Each[S ~[]E, E any](s S, f func(E)) {
 // Equal returns true if the two slices are equal.
 // Two slices are equal if they have the same length and all elements are equal.
 func Equal[S ~[]E, E comparable](a, b S) bool {
-	return EqualOf(a, b, func(e1 E, e2 E) bool { return e1 == e2 })
+	return EqualBy(a, b, func(e1 E, e2 E) bool { return e1 == e2 })
 }
 
-// EqualOf returns true if the two slice are satisfied the quality function.
+// EqualBy returns true if the two slice are satisfied the quality function.
 // Two slices are equal if they have the same length and all elements are satisfied the quality function.
-func EqualOf[S1 ~[]E1, S2 ~[]E2, E1, E2 any](a S1, b S2, eq func(E1, E2) bool) bool {
+func EqualBy[S1 ~[]E1, S2 ~[]E2, E1, E2 any](a S1, b S2, eq func(E1, E2) bool) bool {
 	if len(a) != len(b) {
 		return false
 	}
@@ -109,16 +109,16 @@ func EqualOf[S1 ~[]E1, S2 ~[]E2, E1, E2 any](a S1, b S2, eq func(E1, E2) bool) b
 
 // Index returns the index of the first occurrence of the value in the slice.
 func Index[S ~[]E, E comparable](s S, v E) int {
-	return IndexOf(s, prd.Eq(v))
+	return IndexBy(s, prd.Eq(v))
 }
 
 // LastIndex returns the index of the last occurrence of the value in the slice.
 func LastIndex[S ~[]E, E comparable](s S, v E) int {
-	return LastIndexOf(s, prd.Eq(v))
+	return LastIndexBy(s, prd.Eq(v))
 }
 
-// IndexOf returns the index of the first element in the slice that satisfies the predicate.
-func IndexOf[S ~[]E, E any](s S, p prd.Predicate[E]) int {
+// IndexBy returns the index of the first element in the slice that satisfies the predicate.
+func IndexBy[S ~[]E, E any](s S, p prd.Predicate[E]) int {
 	for i := range s {
 		if p(s[i]) {
 			return i
@@ -127,8 +127,8 @@ func IndexOf[S ~[]E, E any](s S, p prd.Predicate[E]) int {
 	return -1
 }
 
-// LastIndexOf returns the index of the last element in the slice that satisfies the predicate.
-func LastIndexOf[S ~[]E, E any](s S, p prd.Predicate[E]) int {
+// LastIndexBy returns the index of the last element in the slice that satisfies the predicate.
+func LastIndexBy[S ~[]E, E any](s S, p prd.Predicate[E]) int {
 	for i := len(s) - 1; i >= 0; i-- {
 		if p(s[i]) {
 			return i
@@ -139,10 +139,10 @@ func LastIndexOf[S ~[]E, E any](s S, p prd.Predicate[E]) int {
 
 // Contains returns true if the value is in the slice.
 func Contains[S ~[]E, E comparable](s S, v E) bool {
-	return Index(s, v) != -1
+	return ContainsBy(s, prd.Eq(v))
 }
 
-// ContainsOf returns true if at least one element in the slice satisfies the predicate.
-func ContainsOf[S ~[]E, E comparable](s S, p prd.Predicate[E]) bool {
-	return IndexOf(s, p) != -1
+// ContainsBy returns true if at least one element in the slice satisfies the predicate.
+func ContainsBy[S ~[]E, E comparable](s S, p prd.Predicate[E]) bool {
+	return IndexBy(s, p) != -1
 }
