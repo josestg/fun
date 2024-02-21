@@ -1,4 +1,4 @@
-package slices
+package iters
 
 import (
 	"github.com/josestg/fun/prd"
