@@ -136,3 +136,13 @@ func LastIndexOf[S ~[]E, E any](s S, p prd.Predicate[E]) int {
 	}
 	return -1
 }
+
+// Contains returns true if the value is in the slice.
+func Contains[S ~[]E, E comparable](s S, v E) bool {
+	return Index(s, v) != -1
+}
+
+// ContainsOf returns true if at least one element in the slice satisfies the predicate.
+func ContainsOf[S ~[]E, E comparable](s S, p prd.Predicate[E]) bool {
+	return IndexOf(s, p) != -1
+}

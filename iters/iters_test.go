@@ -172,3 +172,14 @@ func TestLastIndexOf(t *testing.T) {
 		t.Errorf("expect index 2, got %d", i)
 	}
 }
+
+func TestContains(t *testing.T) {
+	s := []int{1, 2, 3, 4, 5}
+	if !Contains(s, 3) {
+		t.Error("expect contains 3")
+	}
+
+	if Contains(s, 6) {
+		t.Error("expect not contains 6")
+	}
+}
