@@ -146,3 +146,20 @@ func Contains[S ~[]E, E comparable](s S, v E) bool {
 func ContainsBy[S ~[]E, E comparable](s S, p prd.Predicate[E]) bool {
 	return IndexBy(s, p) != -1
 }
+
+// Reverse reverses the slice in place.
+func Reverse[S ~[]E, E any](s S) {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
+}
+
+// Reversed creates a new copy of slice in reversed.
+func Reversed[S ~[]E, E any](s S) S {
+	n := len(s)
+	r := make(S, len(s))
+	for i, v := range s {
+		r[n-i-1] = v
+	}
+	return r
+}

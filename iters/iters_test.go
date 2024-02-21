@@ -183,3 +183,19 @@ func TestContains(t *testing.T) {
 		t.Error("expect not contains 6")
 	}
 }
+
+func TestReverse(t *testing.T) {
+	s := []int{1, 2, 3, 4, 5}
+	Reverse(s)
+	if !Equal(s, []int{5, 4, 3, 2, 1}) {
+		t.Error("expect reversed")
+	}
+}
+
+func TestReversed(t *testing.T) {
+	s := []int{1, 2, 3, 4, 5}
+	r := Reversed(s)
+	if !Equal(r, []int{5, 4, 3, 2, 1}) {
+		t.Error("expect reversed")
+	}
+}
