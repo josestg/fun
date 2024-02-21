@@ -95,3 +95,12 @@ func TestFind(t *testing.T) {
 		t.Error("expect not found value > 5")
 	}
 }
+
+func TestEach(t *testing.T) {
+	s := []int{1, 2, 3, 4, 5}
+	Each(s, func(v int) {
+		if v > 5 {
+			t.Errorf("expect value <= 5, got %d", v)
+		}
+	})
+}

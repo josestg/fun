@@ -1,6 +1,8 @@
 package slices
 
-import "github.com/josestg/fun/cmp"
+import (
+	"github.com/josestg/fun/cmp"
+)
 
 // Some returns true if at least one element in the slice satisfies the predicate.
 func Some[T any](s []T, p cmp.Predicate[T]) bool {
@@ -74,4 +76,11 @@ func Fold[T, U any](s []T, z U, f func(U, T) U) U {
 		r = f(r, v)
 	}
 	return r
+}
+
+// Each applies the function to each element in the slice.
+func Each[T any](s []T, f func(T)) {
+	for _, v := range s {
+		f(v)
+	}
 }
