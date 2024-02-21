@@ -104,3 +104,21 @@ func TestEach(t *testing.T) {
 		}
 	})
 }
+
+func TestEqual(t *testing.T) {
+	a := []int{1, 2, 3, 4, 5}
+	b := []int{1, 2, 3, 4, 5}
+	if !Equal(a, b) {
+		t.Error("expect equal")
+	}
+
+	c := []int{1, 2, 3, 4}
+	if Equal(a, c) {
+		t.Error("expect not equal")
+	}
+
+	d := []int{1, 2, 3, 4, 6}
+	if Equal(a, d) {
+		t.Error("expect not equal")
+	}
+}
