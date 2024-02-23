@@ -46,8 +46,8 @@ func TestEmpty(t *testing.T) {
 	expectFalse(t, empty(1))
 }
 
-func TestInBetween(t *testing.T) {
-	inBetween := InBetween(1, 3)
+func TestBetweenInclusive(t *testing.T) {
+	inBetween := Between(1, 3, true)
 	expectTrue(t, inBetween(1))
 	expectTrue(t, inBetween(2))
 	expectTrue(t, inBetween(3))
@@ -55,8 +55,8 @@ func TestInBetween(t *testing.T) {
 	expectFalse(t, inBetween(4))
 }
 
-func TestExBetween(t *testing.T) {
-	exBetween := ExBetween(1, 3)
+func TestBetweenExclusive(t *testing.T) {
+	exBetween := Between(1, 3, false)
 	expectFalse(t, exBetween(1))
 	expectTrue(t, exBetween(2))
 	expectFalse(t, exBetween(3))

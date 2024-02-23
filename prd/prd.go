@@ -24,18 +24,13 @@ func Lte[T cmp.Ordered](v T) Predicate[T] { return func(x T) bool { return x <= 
 func Gte[T cmp.Ordered](v T) Predicate[T] { return func(x T) bool { return x >= v } }
 
 // Empty checks if a value is the zero value.
-func Empty[T comparable]() Predicate[T] {
-	var zero T
-	return Eq(zero)
-}
+func Empty[T comparable]() Predicate[T] { return Eq(zeroOf[T]()) }
 
-// InBetween checks if a value is in between of min and max values (inclusive).
-func InBetween[T cmp.Ordered](minValue, maxValue T) Predicate[T] {
-	return And(Gte(minValue), Lte(maxValue))
-}
-
-// ExBetween checks if a value is in between of min and max values (exclusive).
-func ExBetween[T cmp.Ordered](minValue, maxValue T) Predicate[T] {
+// Between checks if a value is in between of min and max values (inclusive).
+func Between[T cmp.Ordered](minValue, maxValue T, inclusive bool) Predicate[T] {
+	if inclusive {
+		return And(Gte(minValue), Lte(maxValue))
+	}
 	return And(Gt(minValue), Lt(maxValue))
 }
 
@@ -47,3 +42,5 @@ func And[T any](p, q Predicate[T]) Predicate[T] { return func(x T) bool { return
 
 // Not returns a predicate that is true if the given predicate is false.
 func Not[T any](p Predicate[T]) Predicate[T] { return func(x T) bool { return !p(x) } }
+
+func zeroOf[T any]() (zero T) { return }
